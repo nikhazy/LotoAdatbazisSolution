@@ -53,10 +53,12 @@ namespace LotoAdatbazis
                 }
                 if (jogosultsagiSzint != -1)
                 {
-                    Main mainPage = new Main(jogosultsagiSzint);
+
+                    MainForm mainPage = new MainForm(jogosultsagiSzint);
                     //Main mainPage = new Main(jogosultsagiSzint);
-                    this.Hide();
                     mainPage.Show();
+                    this.Hide();
+
                 }
                 else
                 {
@@ -117,7 +119,6 @@ namespace LotoAdatbazis
 
         private void CheckIfEnter(KeyPressEventArgs e)
         {
-
             if (e.KeyChar == (char)Keys.Enter)
             {
                 Login();
