@@ -20,17 +20,25 @@ namespace LotoAdatbazis.Services
 
         public DatabaseHandler()
         {
-            _con = new SqlCeConnection(_c);
-            _con.Open();
+            if (!CreateDatabase())
+            {
+                _con = new SqlCeConnection(_c);
+                _con.Open();
+            }
         }
 
-        private void CreateDatabase()
+        private bool CreateDatabase()
         {
             if (!File.Exists(Directory.GetCurrentDirectory() + "\\Adat\\data.sdf"))
             {
                 SqlCeEngine en = new SqlCeEngine(_c);
                 en.CreateDatabase();
                 CreateTable();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         private void CreateTable()
@@ -43,8 +51,8 @@ namespace LotoAdatbazis.Services
         }
         private void InsertAdmin()
         {
-            _con = new SqlCeConnection(_c);
-            _con.Open();
+            //_con = new SqlCeConnection(_c);
+            //_con.Open();
             _cmd = new SqlCeCommand(@"INSERT INTO ACCOUNTS (username,password,level) VALUES ('Admin', '" + PasswordHash.Hash("admin") + "', '1')", _con);
             _cmd.ExecuteNonQuery();
         }
@@ -54,7 +62,7 @@ namespace LotoAdatbazis.Services
             try
             {
                 int jogosultsagiSzint = -1;
-                _cmd = new SqlCeCommand("SELECT * FROM Accounts where username = '" + name.Trim() + "'", _con);// 
+                _cmd = new SqlCeCommand("SELECT * FROM Accounts where username = '" + name.Trim() + "'", _con);
                 _da = new SqlCeDataAdapter(_cmd);
                 _dt = new DataTable();
                 _da.Fill(_dt);
@@ -78,7 +86,7 @@ namespace LotoAdatbazis.Services
             try
             {
                 int jogosultsagiSzint = -1;
-                _cmd = new SqlCeCommand("SELECT * FROM Accounts where username = '" + name.Trim() + "'", _con);// 
+                _cmd = new SqlCeCommand("SELECT * FROM Accounts where username = '" + name.Trim() + "'", _con);
                 _da = new SqlCeDataAdapter(_cmd);
                 _dt = new DataTable();
                 _da.Fill(_dt);
@@ -106,8 +114,8 @@ namespace LotoAdatbazis.Services
         {
             try
             {
-                _con = new SqlCeConnection(_c);
-                _con.Open();
+                //_con = new SqlCeConnection(_c);
+                //_con.Open();
                 _cmd = new SqlCeCommand(@"Delete from Accounts where ID = '" + id + "'", _con);
                 _cmd.ExecuteNonQuery();
             }
@@ -121,8 +129,8 @@ namespace LotoAdatbazis.Services
         {
             try
             {
-                _con = new SqlCeConnection(_c);
-                _con.Open();
+                //_con = new SqlCeConnection(_c);
+                //_con.Open();
                 _cmd = new SqlCeCommand(@"Update Accounts SET username = '" + name + "', level = '" + level + "' where ID='" + id + "'", _con);
                 _cmd.ExecuteNonQuery();
             }
@@ -136,8 +144,8 @@ namespace LotoAdatbazis.Services
         {
             try
             {
-                _con = new SqlCeConnection(_c);
-                _con.Open();
+                //_con = new SqlCeConnection(_c);
+                //_con.Open();
                 _cmd = new SqlCeCommand("Select * from Accounts", _con);// 
                 _da = new SqlCeDataAdapter(_cmd);
                 _dt = new DataTable();
@@ -158,8 +166,8 @@ namespace LotoAdatbazis.Services
             try
             {
                 KeyValuePair<string, int> NameAndLevel = new KeyValuePair<string, int>("hiba",-1);
-                _con = new SqlCeConnection(_c);
-                _con.Open();
+                //_con = new SqlCeConnection(_c);
+                //_con.Open();
                 _cmd = new SqlCeCommand("Select * from Accounts where ID = '" + id + "'", _con);// 
                 _da = new SqlCeDataAdapter(_cmd);
                 _dt = new DataTable();

@@ -13,6 +13,7 @@ using MaterialSkin;
 using System.IO;
 using System.Data.SqlServerCe;
 using LotoAdatbazis.Services;
+using System.Reflection;
 
 namespace LotoAdatbazis
 {
@@ -21,6 +22,7 @@ namespace LotoAdatbazis
         private DatabaseHandler _database;
         public Bejelentkezes()
         {
+            EmbeddedResources.Init();
             InitializeComponent();
             MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -32,8 +34,6 @@ namespace LotoAdatbazis
 
         private void btnBejelentkezes_Click(object sender, EventArgs e)
         {
-            try
-            {
                 int jogosultsagiSzint = -1;
                 if(cbBelepVagyReg.SelectedIndex == 0)
                 {
@@ -53,6 +53,9 @@ namespace LotoAdatbazis
                 {
                     MessageBox.Show("Belépés megtagadva!");
                 }
+
+            try
+            {
             }
             catch
             {
@@ -86,7 +89,7 @@ namespace LotoAdatbazis
             tbJelszo.PasswordChar = '*';
             tbJelszo.TextAlign = HorizontalAlignment.Center;
             //panelHatter.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\hatter2.jpg");
-            panelHatter.BackgroundImage = LotoAdatbazis.Properties.Resources.hatter2;
+            panelHatter.BackgroundImage = EmbeddedResources.Hatter2;
             cbBelepVagyReg.SelectedIndex = 0;
             cbBelepVagyReg.ForeColor = Color.FromArgb(12, 60, 120);
         }

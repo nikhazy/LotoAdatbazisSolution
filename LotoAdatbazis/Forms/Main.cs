@@ -17,6 +17,9 @@ using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Reflection;
+using LotoAdatbazis.Services;
 
 namespace LotoAdatbazis
 {
@@ -41,18 +44,25 @@ namespace LotoAdatbazis
 
         private void Main_Load(object sender, EventArgs e)
         {
-            PrivateFontCollection pfc = new PrivateFontCollection();
-            pfc.AddFontFile(Directory.GetCurrentDirectory() + "\\Adat\\GEInspRg.TTF");
-            foreach(Control c in panelBalMenu.Controls)
+            FontFamily privateFont = EmbeddedResources.LotoFont;
+
+            foreach (Control c in panelBalMenu.Controls)
             {
-                c.Font = new Font(pfc.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(privateFont, 12, FontStyle.Bold);
             }
             BackEnd.FormLoad(btnDelete, btnOpen, btnOpenPdf,btnJelek, label1, label2, label3, label4, pdfViewer, cbTerulet, cbGep, cbGepSzam, cbVerzio, pbDokuMegjelenes, pbNikkoLogo, panelPDFMenu, buttonHide, cbJelMod2);
             pbNikkoLogo.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbNikkoLogo.Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\nikko_gif.gif");
-            pbLogo.Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\loto_gif.gif");
-            pbDokuMegjelenes.Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\megjelen_gif.gif");
-            panelBalMenu.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\hatter.JPG");
+
+            //pbNikkoLogo.Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\nikko_gif.gif");
+            //pbLogo.Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\loto_gif.gif");
+            //pbDokuMegjelenes.Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\megjelen_gif.gif");
+            //panelBalMenu.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\hatter.JPG");
+
+            pbNikkoLogo.Image = EmbeddedResources.NikkoGif;
+            pbLogo.Image = EmbeddedResources.LotoGif;
+            pbDokuMegjelenes.Image = EmbeddedResources.MegjelenGif;
+            panelBalMenu.BackgroundImage = EmbeddedResources.Hatter;
+
             chbDeleteSigns.ForeColor = Color.White;
             PanelInit();
             if (Jogosultsag == 2)
@@ -316,7 +326,8 @@ namespace LotoAdatbazis
                     chbDeleteSigns.Enabled = false;
                     btnJelMindenKijeloles.Enabled = false;
                     SaveBusy = true;
-                    btnJelekDokuKeszites.Image = System.Drawing.Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\loading.gif");
+                    //btnJelekDokuKeszites.Image = System.Drawing.Image.FromFile(Directory.GetCurrentDirectory() + "\\Adat\\loading.gif");
+                    btnJelekDokuKeszites.Image = EmbeddedResources.Loading;
                     btnJelekDokuKeszites.BackColor = Color.FromArgb(0, 129, 188);
                     btnJelekDokuKeszites.Text = "Dokumentum elkészítése folyamatban, kérlek várj!";
                     string PDFName = savefile.FileName;

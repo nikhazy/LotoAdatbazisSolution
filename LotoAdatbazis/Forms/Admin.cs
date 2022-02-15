@@ -31,9 +31,12 @@ namespace LotoAdatbazis
 
         private void Admin_Load(object sender, EventArgs e)
         {
-            //sql = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Directory.GetCurrentDirectory() + "\\LoginDB.mdf;Integrated Security=True;Connect Timeout=30");
             Frissites();
             cbAccessLevel.SelectedIndex = 0;
+
+            string id = dataGridView1.Rows[0].Cells[0].Value.ToString();
+            label1.Text = id;
+            textBoxBehivas();
 
             Init();
         }
@@ -69,6 +72,7 @@ namespace LotoAdatbazis
             btnEdit.ForeColor = Color.White;
             btnEdit.Font = new Font("Arial", 10, FontStyle.Bold);
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Rows[0].Selected = true;
 
             //CreateDatabase();
         }
@@ -83,8 +87,6 @@ namespace LotoAdatbazis
             dataGridView1.Columns[2].Width = 180;
             dataGridView1.Columns[2].Visible = false;
             dataGridView1.Columns[3].HeaderText = "Jogosultság";
-
-            
         }
         public void textBoxBehivas()
         {
@@ -98,9 +100,12 @@ namespace LotoAdatbazis
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            label1.Text = id;
-            textBoxBehivas();
+            if(e.RowIndex != -1)
+            {
+                string id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                label1.Text = id;
+                textBoxBehivas();
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

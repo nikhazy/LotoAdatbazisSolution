@@ -144,8 +144,18 @@ namespace LotoAdatbazis
                 labelGepSzam.BackColor = Color.Transparent;
                 labelVerzio.BackColor = Color.Transparent;
                 pdfViewer.Visible = false;
-                string[] sorok = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Adat\\config.txt");
-                alapKeresoMappa = sorok[0];
+                if(File.Exists(Directory.GetCurrentDirectory() + "\\Adat\\config.txt"))
+                {
+                    try
+                    {
+                        string[] sorok = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Adat\\config.txt");
+                        alapKeresoMappa = sorok[0];
+                    }
+                    catch
+                    {
+
+                    }
+                }
 
                 string[] paths = Directory.GetDirectories(Directory.GetCurrentDirectory() + "\\Adat\\Adatbázis");
                 Array.Sort(paths, (x, y) => String.Compare(x, y));

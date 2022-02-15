@@ -91,6 +91,7 @@
       <DependentUpon>Bejelentkezes.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\DatabaseHandler.cs" />
+    <Compile Include="Services\EmbeddedResources.cs" />
     <Compile Include="Services\FindImage.cs" />
     <Compile Include="Models\Jel.cs" />
     <Compile Include="Models\JelekPDFre.cs" />
@@ -124,7 +125,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="bin\Debug\Adat\GEInspRg.TTF" />
+    <EmbeddedResource Include="Files\GEInspRg.TTF" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -159,13 +160,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\Adat\hatter.jpg" />
-    <None Include="bin\Debug\Adat\hatter2.jpg" />
-    <None Include="bin\Debug\Adat\loading.gif" />
-    <None Include="bin\Debug\Adat\loto_gif.gif" />
-    <None Include="bin\Debug\Adat\megjelen_gif.gif" />
-    <None Include="bin\Debug\Adat\nikko_gif.gif" />
     <Content Include="favicon.ico" />
+    <EmbeddedResource Include="Files\hatter.jpg" />
+    <EmbeddedResource Include="Files\hatter2.jpg" />
+    <EmbeddedResource Include="Files\loading.gif" />
+    <EmbeddedResource Include="Files\loto_gif.gif" />
+    <EmbeddedResource Include="Files\megjelen_gif.gif" />
+    <EmbeddedResource Include="Files\nikko_gif.gif" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
