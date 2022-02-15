@@ -77,49 +77,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs">
+    <Compile Include="Forms\Admin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin.Designer.cs">
+    <Compile Include="Forms\Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
-    <Compile Include="BackEnd.cs" />
-    <Compile Include="Bejelentkezes.cs">
+    <Compile Include="Services\BackEnd.cs" />
+    <Compile Include="Forms\Bejelentkezes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Bejelentkezes.Designer.cs">
+    <Compile Include="Forms\Bejelentkezes.Designer.cs">
       <DependentUpon>Bejelentkezes.cs</DependentUpon>
     </Compile>
-    <Compile Include="FindImage.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Services\DatabaseHandler.cs" />
+    <Compile Include="Services\FindImage.cs" />
+    <Compile Include="Models\Jel.cs" />
+    <Compile Include="Models\JelekPDFre.cs" />
+    <Compile Include="Models\JelTerkeprol.cs" />
+    <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Jel.cs" />
-    <Compile Include="JelekPDFre.cs" />
-    <Compile Include="JelTerkeprol.cs" />
-    <Compile Include="Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="PasswordHash.cs" />
+    <Compile Include="Services\PasswordHash.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpireConvert.cs" />
-    <EmbeddedResource Include="Admin.resx">
+    <Compile Include="Services\SpireConvert.cs" />
+    <EmbeddedResource Include="Forms\Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bejelentkezes.resx">
+    <EmbeddedResource Include="Forms\Bejelentkezes.resx">
       <DependentUpon>Bejelentkezes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -132,6 +124,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="bin\Debug\Adat\GEInspRg.TTF" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -166,12 +159,18 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon %282%29.ico" />
+    <None Include="bin\Debug\Adat\hatter.jpg" />
+    <None Include="bin\Debug\Adat\hatter2.jpg" />
+    <None Include="bin\Debug\Adat\loading.gif" />
+    <None Include="bin\Debug\Adat\loto_gif.gif" />
+    <None Include="bin\Debug\Adat\megjelen_gif.gif" />
+    <None Include="bin\Debug\Adat\nikko_gif.gif" />
     <Content Include="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
