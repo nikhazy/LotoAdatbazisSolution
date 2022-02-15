@@ -58,6 +58,7 @@
             this.tbNev.Name = "tbNev";
             this.tbNev.Size = new System.Drawing.Size(324, 30);
             this.tbNev.TabIndex = 1;
+            this.tbNev.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNev_KeyPress);
             // 
             // label1
             // 
@@ -86,6 +87,7 @@
             this.tbJelszo.Name = "tbJelszo";
             this.tbJelszo.Size = new System.Drawing.Size(324, 30);
             this.tbJelszo.TabIndex = 3;
+            this.tbJelszo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbJelszo_KeyPress);
             // 
             // panelHatter
             // 
@@ -113,6 +115,7 @@
             this.cbBelepVagyReg.Name = "cbBelepVagyReg";
             this.cbBelepVagyReg.Size = new System.Drawing.Size(324, 33);
             this.cbBelepVagyReg.TabIndex = 5;
+            this.cbBelepVagyReg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbBelepVagyReg_KeyPress);
             // 
             // Bejelentkezes
             // 

@@ -524,6 +524,7 @@
         }
 
         #endregion
+
         private System.Windows.Forms.ComboBox cbTerulet;
         private System.Windows.Forms.ComboBox cbGep;
         private System.Windows.Forms.ComboBox cbGepSzam;

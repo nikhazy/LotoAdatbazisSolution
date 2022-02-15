@@ -14,6 +14,7 @@ using System.IO;
 using System.Data.SqlServerCe;
 using LotoAdatbazis.Services;
 using System.Reflection;
+using LotoAdatbazis.Forms;
 
 namespace LotoAdatbazis
 {
@@ -34,18 +35,26 @@ namespace LotoAdatbazis
 
         private void btnBejelentkezes_Click(object sender, EventArgs e)
         {
+            Login();
+        }
+
+        private void Login()
+        {
+            try
+            {
                 int jogosultsagiSzint = -1;
-                if(cbBelepVagyReg.SelectedIndex == 0)
+                if (cbBelepVagyReg.SelectedIndex == 0)
                 {
-                    jogosultsagiSzint = _database.Login(tbNev.Text,tbJelszo.Text);
+                    jogosultsagiSzint = _database.Login(tbNev.Text, tbJelszo.Text);
                 }
-                else if(cbBelepVagyReg.SelectedIndex == 1)
+                else if (cbBelepVagyReg.SelectedIndex == 1)
                 {
                     jogosultsagiSzint = _database.Registration(tbNev.Text, tbJelszo.Text);
                 }
-                if(jogosultsagiSzint != -1)
+                if (jogosultsagiSzint != -1)
                 {
                     Main mainPage = new Main(jogosultsagiSzint);
+                    //Main mainPage = new Main(jogosultsagiSzint);
                     this.Hide();
                     mainPage.Show();
                 }
@@ -53,9 +62,6 @@ namespace LotoAdatbazis
                 {
                     MessageBox.Show("Belépés megtagadva!");
                 }
-
-            try
-            {
             }
             catch
             {
@@ -92,6 +98,30 @@ namespace LotoAdatbazis
             panelHatter.BackgroundImage = EmbeddedResources.Hatter2;
             cbBelepVagyReg.SelectedIndex = 0;
             cbBelepVagyReg.ForeColor = Color.FromArgb(12, 60, 120);
+        }
+
+        private void tbNev_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckIfEnter(e);
+        }
+
+        private void tbJelszo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckIfEnter(e);
+        }
+
+        private void cbBelepVagyReg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckIfEnter(e);
+        }
+
+        private void CheckIfEnter(KeyPressEventArgs e)
+        {
+
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Login();
+            }
         }
     }
 }

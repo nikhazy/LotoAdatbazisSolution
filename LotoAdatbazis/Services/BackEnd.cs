@@ -19,6 +19,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using LotoAdatbazis.Forms.Controls;
 
 namespace LotoAdatbazis
 {
@@ -53,6 +54,7 @@ namespace LotoAdatbazis
         public static Panel panelJelMenu;
         public static ComboBox cbJelMod2;
         public static int cbJelMod2_SelectedIndex;
+        public static SignCreatorMenu signCreator;
 
 
         public static void FormLoad(Button _btnDelete, Button _btnOpen, Button _btnOpenPdf, Button _btnJelek, Label _labelTerulet, Label _labelGep, Label _labelGepSzam, Label _labelVerzio, AxAcroPDFLib.AxAcroPDF _pdfViewer, ComboBox _cbTerulet, ComboBox _cbGep, ComboBox _cbGepSzam, ComboBox _cbVerzio, PictureBox _dokuMegjel, PictureBox _nikkoSoft, Panel _panelJelMenu, Button _btnVissza, ComboBox _cbJelMod2)
@@ -76,7 +78,7 @@ namespace LotoAdatbazis
             panelJelMenu = _panelJelMenu;
             cbJelMod2 = _cbJelMod2;
 
-            cbJelMod2.SelectedIndexChanged += CbJelMod2_SelectedIndexChanged;
+            //cbJelMod2.SelectedIndexChanged += CbJelMod2_SelectedIndexChanged;
             cbJelMod2_SelectedIndex = 0;
 
             btnOpenPdf.AutoSize = false;
@@ -170,9 +172,122 @@ namespace LotoAdatbazis
             }
         }
 
-        private static void CbJelMod2_SelectedIndexChanged(object sender, EventArgs e)
+        public static void FormLoadV2(Button _btnDelete, Button _btnOpen, Button _btnOpenPdf, Button _btnJelek, Label _labelTerulet, Label _labelGep, Label _labelGepSzam, Label _labelVerzio, AxAcroPDFLib.AxAcroPDF _pdfViewer, ComboBox _cbTerulet, ComboBox _cbGep, ComboBox _cbGepSzam, ComboBox _cbVerzio, PictureBox _dokuMegjel, PictureBox _nikkoSoft, Button btnAdmin, SignCreatorMenu _signCreator)
         {
-            cbJelMod2_SelectedIndex = cbJelMod2.SelectedIndex;
+            btnDelete = _btnDelete;
+            btnOpen = _btnOpen;
+            btnOpenPdf = _btnOpenPdf;
+            btnJelek = _btnJelek;
+            labelTerulet = _labelTerulet;
+            labelGep = _labelGep;
+            labelGepSzam = _labelGepSzam;
+            labelVerzio = _labelVerzio;
+            pdfViewer = _pdfViewer;
+            cbTerulet = _cbTerulet;
+            cbGep = _cbGep;
+            cbGepSzam = _cbGepSzam;
+            cbVerzio = _cbVerzio;
+            dokuMegjel = _dokuMegjel;
+            nikkoSoft = _nikkoSoft;
+            signCreator = _signCreator;
+
+            //cbJelMod2.SelectedIndexChanged += CbJelMod2_SelectedIndexChanged;
+            //cbJelMod2_SelectedIndex = 0;
+
+            btnOpenPdf.AutoSize = false;
+            btnOpenPdf.Size = new Size(315, 65);
+            btnOpenPdf.FlatAppearance.CheckedBackColor = Color.FromArgb(25, 118, 210);
+            btnOpenPdf.FlatAppearance.MouseOverBackColor = Color.FromArgb(22, 107, 192);
+            btnOpenPdf.FlatStyle = FlatStyle.Flat;
+            btnOpenPdf.BackColor = Color.FromArgb(21, 101, 192);
+            btnOpenPdf.FlatAppearance.BorderColor = Color.FromArgb(18, 90, 180);
+            btnOpenPdf.ForeColor = Color.White;
+            btnOpenPdf.EnabledChanged += Button_EnabledChanged;
+
+            btnOpen.AutoSize = false;
+            btnOpen.Size = new Size(315, 65);
+            btnOpen.FlatAppearance.CheckedBackColor = Color.FromArgb(25, 118, 210);
+            btnOpen.FlatAppearance.MouseOverBackColor = Color.FromArgb(22, 107, 192);
+            btnOpen.FlatStyle = FlatStyle.Flat;
+            btnOpen.BackColor = Color.FromArgb(21, 101, 192);
+            btnOpen.FlatAppearance.BorderColor = Color.FromArgb(18, 90, 180);
+            btnOpen.ForeColor = Color.White;
+            btnOpen.EnabledChanged += Button_EnabledChanged;
+
+            btnDelete.AutoSize = false;
+            btnDelete.Size = new Size(315, 65);
+            btnDelete.FlatAppearance.CheckedBackColor = Color.FromArgb(25, 118, 210);
+            btnDelete.FlatAppearance.MouseOverBackColor = Color.FromArgb(22, 107, 192);
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.BackColor = Color.FromArgb(21, 101, 192);
+            btnDelete.FlatAppearance.BorderColor = Color.FromArgb(18, 90, 180);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.EnabledChanged += Button_EnabledChanged;
+
+            btnJelek.AutoSize = false;
+            btnJelek.Size = new Size(315, 65);
+            btnJelek.FlatAppearance.CheckedBackColor = Color.FromArgb(25, 118, 210);
+            btnJelek.FlatAppearance.MouseOverBackColor = Color.FromArgb(22, 107, 192);
+            btnJelek.FlatStyle = FlatStyle.Flat;
+            btnJelek.BackColor = Color.FromArgb(21, 101, 192);
+            btnJelek.FlatAppearance.BorderColor = Color.FromArgb(18, 90, 180);
+            btnJelek.ForeColor = Color.White;
+            btnJelek.EnabledChanged += Button_EnabledChanged;
+
+            btnAdmin.FlatAppearance.CheckedBackColor = Color.FromArgb(25, 118, 210);
+            btnAdmin.FlatAppearance.MouseOverBackColor = Color.FromArgb(22, 107, 192);
+            btnAdmin.FlatStyle = FlatStyle.Flat;
+            btnAdmin.BackColor = Color.FromArgb(18, 91, 180);
+            btnAdmin.FlatAppearance.BorderColor = Color.FromArgb(18, 90, 180);
+            btnAdmin.ForeColor = Color.White;
+            //btnVissza.AutoSize = false;
+            //btnVissza.Size = new Size(100, 50);
+            //btnVissza.FlatAppearance.CheckedBackColor = Color.FromArgb(25, 118, 210);
+            //btnVissza.FlatAppearance.MouseOverBackColor = Color.FromArgb(22, 107, 192);
+            //btnVissza.FlatStyle = FlatStyle.Flat;
+            //btnVissza.BackColor = Color.FromArgb(18, 91, 180);
+            //btnVissza.FlatAppearance.BorderColor = Color.FromArgb(18, 90, 180);
+            //btnVissza.ForeColor = Color.White;
+
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\Adat\\Adatbázis"))
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Adat\\Adatbázis");
+            }
+
+            try
+            {
+                btnDelete.Enabled = false;
+                btnOpen.Enabled = false;
+                btnJelek.Enabled = false;
+                labelTerulet.BackColor = Color.Transparent;
+                labelGep.BackColor = Color.Transparent;
+                labelGepSzam.BackColor = Color.Transparent;
+                labelVerzio.BackColor = Color.Transparent;
+                pdfViewer.Visible = false;
+                if (File.Exists(Directory.GetCurrentDirectory() + "\\Adat\\config.txt"))
+                {
+                    try
+                    {
+                        string[] sorok = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Adat\\config.txt");
+                        alapKeresoMappa = sorok[0];
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+                string[] paths = Directory.GetDirectories(Directory.GetCurrentDirectory() + "\\Adat\\Adatbázis");
+                Array.Sort(paths, (x, y) => String.Compare(x, y));
+                for (int i = 0; i < paths.Length; i++)
+                {
+                    cbTerulet.Items.Add(CsereldAPertVissza(paths[i].Split('\\').Last()));
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         private static void Button_EnabledChanged(object sender, EventArgs e)
@@ -620,7 +735,7 @@ namespace LotoAdatbazis
         }
         public static void cbVerzioSelectedIndexChanged()
         {
-            panelJelMenu.Visible = false;
+            //panelJelMenu.Visible = false;
             if (cbVerzio.SelectedIndex != -1)
             {
                 btnDelete.Enabled = true;
@@ -748,12 +863,14 @@ namespace LotoAdatbazis
         }
         public static void btnVisszaClick()
         {
-            panelJelMenu.Visible = false;
+            //panelJelMenu.Visible = false;
+            signCreator.Visible = false;
         }
         public static bool btnJelekBusy = false;
         public static void btnJelekClick()
         {
-            panelJelMenu.Visible = !panelJelMenu.Visible;
+            //panelJelMenu.Visible = !panelJelMenu.Visible;
+            signCreator.Visible = !signCreator.Visible;
         }
         public static async void JelekKigyujtese()
         {
