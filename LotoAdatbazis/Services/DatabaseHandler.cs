@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlServerCe;
 using System.IO;
@@ -16,10 +17,12 @@ namespace LotoAdatbazis.Services
         private SqlCeConnection _con;
         private SqlCeDataAdapter _da;
         private DataTable _dt;
-        private string _c = "DataSource=\"Adat\\data.sdf\"; Password=\"lthun1921\"";
+        private string _c;
 
         public DatabaseHandler()
         {
+            _c = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            _c = _c.Replace("{AppDir}", Directory.GetCurrentDirectory());
             if (!CreateDatabase())
             {
                 _con = new SqlCeConnection(_c);
@@ -29,12 +32,20 @@ namespace LotoAdatbazis.Services
 
         private bool CreateDatabase()
         {
-            if (!File.Exists(Directory.GetCurrentDirectory() + "\\Adat\\data.sdf"))
+            if(!Directory.Exists(Directory.GetCurrentDirectory() + "\\Adat\\"))
             {
-                SqlCeEngine en = new SqlCeEngine(_c);
-                en.CreateDatabase();
-                CreateTable();
-                return true;
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Adat\\");
+                if (!File.Exists(Directory.GetCurrentDirectory() + "\\Adat\\data.sdf"))
+                {
+                    SqlCeEngine en = new SqlCeEngine(_c);
+                    en.CreateDatabase();
+                    CreateTable();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
