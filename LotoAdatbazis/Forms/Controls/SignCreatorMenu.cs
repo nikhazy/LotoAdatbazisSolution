@@ -106,7 +106,7 @@ namespace LotoAdatbazis.Forms.Controls
             for (int i = 0; i < files.Length; i++)
             {
                 string[] segedValtozo = files[i].Split('\\');
-                string fileNameWithFolders = segedValtozo[segedValtozo.Length - 5] + "\\" + segedValtozo[segedValtozo.Length - 4] + "\\" + segedValtozo[segedValtozo.Length - 3] + "\\" + segedValtozo[segedValtozo.Length - 2] + "\\" + segedValtozo[segedValtozo.Length - 1].Split('.').First();
+                string fileNameWithFolders = segedValtozo[segedValtozo.Length - 5] + "\\" + segedValtozo[segedValtozo.Length - 4] + "\\" + segedValtozo[segedValtozo.Length - 3] + "\\" + segedValtozo[segedValtozo.Length - 2] + "\\" + segedValtozo[segedValtozo.Length - 1].Substring(0, segedValtozo[segedValtozo.Length - 1].Length-4);
                 dataGridView1.Rows.Add(fileNameWithFolders, false);
                 if (i % 2 == 0)
                 {
@@ -218,26 +218,37 @@ namespace LotoAdatbazis.Forms.Controls
                     else if (cbJelMod.SelectedIndex == 1)
                     {
                         List<JelekPDFre> Jelek = new List<JelekPDFre>();
-                        JelekPDFre.Meret = cbJelMeret.SelectedIndex + 1;
-                        for (int i = 0; i < dataGridView1.Rows.Count; i++) //Kigyűjtöm az összes jelet ami még nincs
-                        {
-                            if (bool.Parse(dataGridView1[1, i].Value.ToString()) == true)
-                            {
-                                string tempFile = Directory.GetCurrentDirectory() + "\\Adat\\Adatbázis\\" + dataGridView1[0, i].Value.ToString() + ".pdf";
-                                await Task.Run(() => EgyJelKigyujtesHaMegNincs(tempFile));
-
-                                Jelek.Add(new JelekPDFre(tempFile));
-
-                                string[] jelek = Directory.GetFiles(Path.GetDirectoryName(tempFile) + "\\Jelek");
-                                for (int j = 0; j < jelek.Length; j++)
-                                {
-                                    Jelek.Last().Jelek.Add(jelek[j]);
-                                }
-                            }
-                        }
-
                         try //VIsszatenni
                         {
+                            JelekPDFre.Meret = cbJelMeret.SelectedIndex + 1;
+                            int osszesKijeloltFile = 0;
+                            for (int i = 0; i < dataGridView1.Rows.Count; i++) //Megszamolom az összes kijelölést
+                            {
+                                if (bool.Parse(dataGridView1[1, i].Value.ToString()) == true)
+                                {
+                                    osszesKijeloltFile++;
+                                }
+                            }
+                            int eddigElkeszult = 0;
+                            for (int i = 0; i < dataGridView1.Rows.Count; i++) //Kigyűjtöm az összes jelet ami még nincs
+                            {
+                                if (bool.Parse(dataGridView1[1, i].Value.ToString()) == true)
+                                {
+                                    string tempFile = Directory.GetCurrentDirectory() + "\\Adat\\Adatbázis\\" + dataGridView1[0, i].Value.ToString() + ".pdf";
+                                    await Task.Run(() => EgyJelKigyujtesHaMegNincs(tempFile));
+
+                                    Jelek.Add(new JelekPDFre(tempFile));
+
+                                    string[] jelek = Directory.GetFiles(Path.GetDirectoryName(tempFile) + "\\Jelek");
+                                    for (int j = 0; j < jelek.Length; j++)
+                                    {
+                                        Jelek.Last().Jelek.Add(jelek[j]);
+                                    }
+                                    eddigElkeszult++;
+                                    btnJelekDokuKeszites.Text = $"Elkészült dokumentumok: {eddigElkeszult}/{osszesKijeloltFile}";
+                                }
+                            }
+
 
                         }
                         catch
